@@ -10,12 +10,11 @@ const app = express();
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
-app.use(morgan('dev'));
+app.use(morgan('combined'));
 
 app.get('/me', async (req, res) => {
   const timestamp = new Date().toISOString();
   let fact;
-
   try {
     const response = await axios.get(config.catFact.url, { timeout: config.catFact.timeout });
     fact = typeof response.data.fact === 'string'
